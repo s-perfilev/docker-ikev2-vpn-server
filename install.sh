@@ -13,14 +13,3 @@ EOT
 #install tor
 apt-get update -qq
 apt-get install -qy tor
-
-#tor config
-
-cat <<'EOT' >> /etc/tor/torrc
-VirtualAddrNetworkIPv4 10.8.0.0/10
-AutomapHostsOnResolve 1
-TransPort 9040
-TransListenAddress 1.1.1.1
-EOT
-
-
