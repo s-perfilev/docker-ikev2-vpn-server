@@ -10,6 +10,11 @@ RUN rm /etc/ipsec.secrets
 ADD ./etc/* /etc/
 ADD ./bin/* /usr/bin/
 
+COPY install.sh /tmp/
+RUN chmod +x /tmp/install.sh 
+RUN /tmp/install.sh 
+RUN rm /tmp/install.sh
+
 VOLUME /etc
 
 # http://blogs.technet.com/b/rrasblog/archive/2006/06/14/which-ports-to-unblock-for-vpn-traffic-to-pass-through.aspx
