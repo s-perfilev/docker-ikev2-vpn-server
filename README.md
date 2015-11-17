@@ -1,17 +1,17 @@
 # IKEv2 VPN Server running on Docker with Tor service
 !!! Forked from [`gaomd/docker-ikev2-vpn-server`](https://github.com/gaomd/docker-ikev2-vpn-server) !!!
 
-Recipe to build [`pezzak/ikev2-vpn-server-tor`](https://registry.hub.docker.com/u/pezzak/docker-ikev2-vpn-server-tor/) Docker image.
+Recipe to build [`pezzak/ikev2-vpn-server-tor`](https://registry.hub.docker.com/u/pezzak/ikev2-vpn-server-tor/) Docker image.
 
 ## 1. Start the IKEv2 VPN Server
 
-    docker run -d --name ikev2-vpn-server --privileged -p 500:500/udp -p 4500:4500/udp pezzak/docker-ikev2-vpn-server-tor
+    docker run -d --name ikev2-vpn-server --privileged -p 500:500/udp -p 4500:4500/udp pezzak/ikev2-vpn-server-tor
 
 ## 2. Generate a .mobileconfig file for iOS / OS X
 
 *Replace `vpn1.example.com` with your own domain name and make sure it resolves to you server's IP address.*
 
-    docker run -i -t --rm --volumes-from ikev2-vpn-server -e "HOST=vpn1.example.com" pezzak/docker-ikev2-vpn-server-tor generate-mobileconfig > ikev2-vpn.mobileconfig
+    docker run -i -t --rm --volumes-from ikev2-vpn-server -e "HOST=vpn1.example.com" pezzak/ikev2-vpn-server-tor generate-mobileconfig > ikev2-vpn.mobileconfig
 
 This command generates an `ikev2-vpn.mobileconfig` file, transfer it to your local computer via SSH tunnel (`scp`) or any other secure methods.
 
