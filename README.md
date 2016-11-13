@@ -1,5 +1,5 @@
 # IKEv2 VPN Server running on Docker with Tor service
-!!! Forked from [`pezzak/ikev2-vpn-server-tor`](https://github.com/gaomd/docker-ikev2-vpn-server) !!!
+!!! Forked from [`pezzak/ikev2-vpn-server-tor`](https://github.com/pezzak/docker-ikev2-vpn-server) !!!
 
 Unlike pezzak's version, this docker supports simultaneous work both VPN and TOR.
 
