@@ -27,8 +27,10 @@
 sysctl net.ipv4.ip_forward=1
 
 iptables -t nat -F
-iptables -t nat -A PREROUTING -s 10.8.0.0/24 -p tcp -j REDIRECT --to-ports 9040
-iptables -t nat -A PREROUTING -s 10.8.0.0/24 -p udp --dport 53 -j REDIRECT --to-ports 53
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -m policy --dir out --pol ipsec -j ACCEPT
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+iptables -t nat -A PREROUTING -s 10.8.1.0/24 -p tcp -j REDIRECT --to-ports 9040
+iptables -t nat -A PREROUTING -s 10.8.1.0/24 -p udp --dport 53 -j REDIRECT --to-ports 53
 
 # hotfix for openssl `unable to write 'random state'` stderr
 SHARED_SECRET="123$(openssl rand -base64 32 2>/dev/null)"
@@ -38,7 +40,7 @@ SHARED_SECRET="123$(openssl rand -base64 32 2>/dev/null)"
 
 IP=`/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'`
 cat <<'EOT' > /etc/tor/torrc
-VirtualAddrNetworkIPv4 10.8.0.0/10
+VirtualAddrNetworkIPv4 10.8.1.0/10
 AutomapHostsOnResolve 1
 TransPort 9040
 DNSPort 53
